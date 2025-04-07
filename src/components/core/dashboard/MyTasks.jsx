@@ -6,6 +6,7 @@ import { Spinner } from "../../common/Spinner";
 import { motion } from "framer-motion";
 import { formattedFullDate } from "../../../utils/dateFormatter";
 import { STATUS } from "../../../utils/constants";
+import LayoutProvider from "../../common/LayoutProvider";
 
 const MyTasks = () => {
   const { token, loading, setLoading } = useContext(AuthContext);
@@ -27,10 +28,7 @@ const MyTasks = () => {
   if (loading || !tasks) return <Spinner />;
 
   return (
-    <div className="w-full min-h-screen p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold text-[#1C398E] text-center mb-8">
-        My Tasks
-      </h1>
+    <LayoutProvider heading={"My Tasks"}>
       {tasks && tasks.length === 0 ? (
         <p className="text-center text-xl text-gray-600">
           No Tasks assigned to you yet
@@ -64,9 +62,8 @@ const MyTasks = () => {
                     {formattedFullDate(ts?.deadline)}
                   </p>
                   <span
-                    className={`p-[0.2rem] px-[0.5rem] rounded-full text-sm font-medium text-white ${
-                      ts?.status === STATUS.COMPLETED ? "bg-green-500" : "bg-red-500"
-                    }`}
+                    className={`p-[0.2rem] px-[0.5rem] rounded-full text-sm font-medium text-white ${ts?.status === STATUS.COMPLETED ? "bg-green-500" : "bg-red-500"
+                      }`}
                   >
                     {ts?.status}
                   </span>
@@ -76,7 +73,7 @@ const MyTasks = () => {
           ))}
         </motion.div>
       )}
-    </div>
+    </LayoutProvider>
   );
 };
 

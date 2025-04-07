@@ -1,60 +1,50 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../../Context/AuthContext";
+import LayoutProvider from "../../common/LayoutProvider";
 
 export const Profile = () => {
 
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   // console.log(user)
 
   return (
-    <div className="w-full h-full flex lg:items-center justify-center bg-[#E5E7EB] sm:p-6">
-      <motion.div
-        className="w-full sm:w-full flex flex-col gap-4 max-w-2xl bg-white shadow-lg rounded-2xl p-2.5 sm:p-8 border border-gray-200"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        {/* Profile Header */}
-        <motion.h1
-          className="text-3xl font-bold sm:text-4xl sm:font-extrabold text-[#1C398E] pb-2 text-center"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4 }}
+    <LayoutProvider heading={'Profile'}>
+      <div className="flex gap-3 w-full">
+        <motion.div
+          className="w-full sm:w-full flex flex-col gap-4 max-w-2xl bg-white shadow-md rounded-2xl p-2.5 sm:p-8 border border-gray-200"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          My Profile
-        </motion.h1>
-
-        {/* Profile Details */}
-        <div className="space-y-4  flex flex-col gap-2 w-full">
-          <ProfileItem label="Name" value={user?.name} />
-          <ProfileItem label="Email" value={user?.email} />
-          <ProfileItem label="Phone No" value={user?.phoneNo} />
-          <ProfileItem label="Assigned Team" value={user?.team?.teamName} />
-          <ProfileItem label="Assigned Tasks" value={user?.tasks?.length} />
-          {
-            user?.teamLeader && 
-            <ProfileItem label="Leader of" value={user?.teamLeader?.teamName} />
-          }
-        </div>
-
-        {/* Action Buttons */}
-        {/* <motion.div
-          className="flex justify-center gap-4"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-[#FF9F1C] text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-[#e38e1b] transition"
+          {/* Profile Header */}
+          <motion.h1
+            className="text-3xl font-bold sm:text-4xl sm:font-extrabold text-[#1C398E] pb-2 text-center"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
           >
-            Logout
-          </motion.button>
-        </motion.div> */}
-      </motion.div>
-    </div>
+            Employee Details
+          </motion.h1>
+
+          {/* Profile Details */}
+          <div className="space-y-4  flex flex-col gap-2 w-full">
+            <ProfileItem label="Name" value={user?.name} />
+            <ProfileItem label="Email" value={user?.email} />
+            <ProfileItem label="Phone No" value={user?.phoneNo} />
+            <ProfileItem label="Assigned Team" value={user?.team?.teamName} />
+            <ProfileItem label="Assigned Tasks" value={user?.tasks?.length} />
+            {
+              user?.teamLeader &&
+              <ProfileItem label="Leader of" value={user?.teamLeader?.teamName} />
+            }
+          </div>
+        </motion.div>
+        <div className="shadow-md ">
+          <img src="/m1.jpg" alt="img" className="rounded-lg" />
+        </div>
+      </div>
+    </LayoutProvider>
   );
 };
 
