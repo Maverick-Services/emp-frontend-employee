@@ -30,5 +30,5 @@ export const sideBarLinks = [
         name: "Announcements",
         path: "/dashboard/announcements",
         icon: GrAnnounce
-    },
+    }
 ]
